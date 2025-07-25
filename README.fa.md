@@ -1,11 +1,13 @@
 # افزونه Abdal MagniCode – بازبینی کد با ذره‌بین در فایرفاکس
 
-## 📘 زبان‌های دیگر
-- [🇬🇧 English - انگلیسی](README.md)
 
 <p align="center">
   <img src="shot.png" alt="تصویر اسکرین‌شات افزونه Abdal MagniCode" width="600">
 </p>
+
+
+## 📘 زبان‌های دیگر
+- [🇬🇧 English - انگلیسی](README.md)
 
 ---
 
