@@ -1,4 +1,4 @@
-# Abdal MagniCode – Code Inspector with Magnifier for Firefox
+# Abdal MagniCode
 
 
 <p align="center">

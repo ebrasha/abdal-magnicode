@@ -1,4 +1,4 @@
-# افزونه Abdal MagniCode – بازبینی کد با ذره‌بین در فایرفاکس
+# افزونه Abdal MagniCode 
 
 
 <p align="center">
