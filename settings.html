@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdal MagniCode - Settings</title>
+    <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="icons/icon48.png" alt="Abdal MagniCode" class="logo-icon">
+                    <h1>Abdal MagniCode</h1>
+                </div>
+                <p class="subtitle">Powerful Code Inspector Extension</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="settings-card">
+                <h2>Magnifier Settings</h2>
+                
+                <div class="setting-group">
+                    <label for="magnifierSize" class="setting-label">
+                        <span class="label-text">Magnifier Size</span>
+                        <span class="label-value" id="sizeValue">200px</span>
+                    </label>
+                    <input type="range" id="magnifierSize" min="100" max="400" value="200" class="slider">
+                    <div class="range-labels">
+                        <span>Small</span>
+                        <span>Large</span>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <label for="magnifierOpacity" class="setting-label">
+                        <span class="label-text">Magnifier Opacity</span>
+                        <span class="label-value" id="opacityValue">80%</span>
+                    </label>
+                    <input type="range" id="magnifierOpacity" min="10" max="100" value="80" class="slider">
+                    <div class="range-labels">
+                        <span>Transparent</span>
+                        <span>Opaque</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-card">
+                <h2>Code Inspection Settings</h2>
+                
+                <div class="setting-group">
+                    <div class="toggle-container">
+                        <label for="autoCopy" class="toggle-label">
+                            <span class="label-text">Auto-copy code to clipboard</span>
+                            <span class="label-description">Automatically copy inspected element code to clipboard</span>
+                        </label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="autoCopy">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-card">
+                <h2>About</h2>
+                <div class="about-content">
+                    <div class="author-info">
+                        <h3>Developer</h3>
+                        <p><strong>Ebrahim Shafiei (EbraSha)</strong></p>
+                        <p>Email: Prof.Shafiei@Gmail.com</p>
+                        <p>GitHub: <a href="https://github.com/EbraSha" target="_blank">@EbraSha</a></p>
+                    </div>
+                    <div class="version-info">
+                        <p><strong>Version:</strong> 1.0.0</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <button id="saveSettings" class="save-button">
+                <span class="button-icon">💾</span>
+                Save Settings
+            </button>
+            <button id="resetSettings" class="reset-button">
+                <span class="button-icon">🔄</span>
+                Reset to Default
+            </button>
+        </footer>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="settings.js"></script>
+</body>
+</html> 

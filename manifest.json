@@ -1,0 +1,45 @@
+{
+  "manifest_version": 2,
+  "name": "Abdal MagniCode",
+  "version": "1.0.0",
+  "description": "A powerful code inspector extension with magnifying glass functionality",
+  "author": "Ebrahim Shafiei (EbraSha)",
+  "homepage_url": "https://github.com/ebrasha",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "96": "icons/icon96.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "clipboardWrite",
+    "contextMenus"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["magnifier.css"]
+    }
+  ],
+  "browser_action": {
+    "default_title": "Abdal MagniCode",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "options_ui": {
+    "page": "settings.html",
+    "open_in_tab": false
+  },
+  "web_accessible_resources": [
+    "icons/*.png"
+  ]
+} 

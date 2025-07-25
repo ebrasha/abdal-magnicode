@@ -1,0 +1,127 @@
+/*
+ **********************************************************************
+ * -------------------------------------------------------------------
+ * Project Name : Abdal MagniCode
+ * File Name    : magnifier.css
+ * Author       : Ebrahim Shafiei (EbraSha)
+ * Email        : Prof.Shafiei@Gmail.com
+ * Created On   : 2024-12-19 15:30:00
+ * Description  : CSS styles for Abdal MagniCode extension magnifier and UI elements
+ * -------------------------------------------------------------------
+ *
+ * "Coding is an engaging and beloved hobby for me. I passionately and insatiably pursue knowledge in cybersecurity and programming."
+ * – Ebrahim Shafiei
+ *
+ **********************************************************************
+ */
+
+/* Magnifier Styles */
+#abdal-magnifier {
+  position: fixed;
+  border-radius: 50%;
+  border: 3px solid black;
+  background: radial-gradient(#f5fcfc 45%, gray);
+  pointer-events: none;
+  z-index: 10001;
+  display: none;
+  overflow: hidden;
+  transition: all 0.1s ease;
+  box-shadow: 
+    0 0 20px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Code Display Styles */
+#abdal-code-display {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.95);
+  color: #00ff00;
+  font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
+  font-size: 12px;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  z-index: 10002;
+  overflow: auto;
+  display: none;
+  backdrop-filter: blur(10px);
+  max-width: 400px;
+  max-height: 300px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+#abdal-code-display::-webkit-scrollbar {
+  width: 8px;
+}
+
+#abdal-code-display::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+#abdal-code-display::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+#abdal-code-display::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Floating Menu Styles */
+#abdal-floating-menu {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, #677be6, #754fa7);
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  z-index: 10003;
+  display: none;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(103, 123, 230, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+#abdal-floating-menu:hover {
+  background: linear-gradient(135deg, #5a6fd8, #6a47a0);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(103, 123, 230, 0.4);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Notification Styles */
+.abdal-notification {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  z-index: 10003;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+  20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+} 
