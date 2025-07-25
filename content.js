@@ -43,6 +43,8 @@ class AbdalMagnicode {
     browser.runtime.onMessage.addListener((message) => {
       if (message.action === "toggleMagnifier") {
         this.toggleMagnifier();
+      } else if (message.action === "settingsUpdated") {
+        this.updateSettings(message.settings);
       }
     });
 
@@ -54,6 +56,29 @@ class AbdalMagnicode {
       this.deactivateAbdalMagnicodeMagnifier();
     } else {
       this.activateAbdalMagnicodeMagnifier();
+    }
+  }
+
+  updateSettings(newSettings) {
+    const oldSize = this.settings.magnifierSize;
+    this.settings = { ...this.settings, ...newSettings };
+    
+    console.log('Settings updated:', this.settings);
+    
+    // Update magnifier if it exists
+    if (this.abdalMagnicodeMagnifier) {
+      // If size changed, we need to recreate the magnifier
+      if (newSettings.magnifierSize && newSettings.magnifierSize !== oldSize) {
+        this.abdalMagnicodeMagnifier.remove();
+        this.createAbdalMagnicodeMagnifier();
+      } else {
+        // Just update background gradient and matte overlay for opacity
+        this.abdalMagnicodeMagnifier.style.background = `radial-gradient(rgba(245, 252, 252, ${this.settings.magnifierOpacity}) 45%, rgba(128, 128, 128, ${this.settings.magnifierOpacity}))`;
+        if (this.abdalMagnicodeMatteOverlay) {
+          this.abdalMagnicodeMatteOverlay.style.backdropFilter = `blur(${this.settings.magnifierOpacity * 5}px)`;
+        }
+        console.log('Updated magnifier opacity to:', this.settings.magnifierOpacity);
+      }
     }
   }
 
@@ -80,6 +105,7 @@ class AbdalMagnicode {
       this.abdalMagnicodeCodeDisplay.remove();
       this.abdalMagnicodeCodeDisplay = null;
     }
+    this.abdalMagnicodeMatteOverlay = null;
     
     // Hide floating menu
     // Removed: if (this.abdalMagnicodeFloatingMenu) { ... }
@@ -98,8 +124,8 @@ class AbdalMagnicode {
       width: ${this.settings.magnifierSize}px;
       height: ${this.settings.magnifierSize}px;
       border-radius: 50%;
-      border: 3px solid black;
-      background: radial-gradient(#f5fcfc 45%, gray);
+      border: 6px solid rgba(0, 0, 0, 0.1);
+      background: radial-gradient(rgba(245, 252, 252, ${this.settings.magnifierOpacity}) 45%, rgba(128, 128, 128, ${this.settings.magnifierOpacity}));
       pointer-events: none;
       z-index: 10001;
       display: none;
@@ -120,7 +146,23 @@ class AbdalMagnicode {
       overflow: hidden;
     `;
     
+    // Create matte overlay
+    this.abdalMagnicodeMatteOverlay = document.createElement('div');
+    this.abdalMagnicodeMatteOverlay.id = 'abdalMagnicode-matte-overlay';
+    this.abdalMagnicodeMatteOverlay.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      backdrop-filter: blur(${this.settings.magnifierOpacity * 5}px);
+      pointer-events: none;
+      z-index: 1;
+    `;
+    
     this.abdalMagnicodeMagnifier.appendChild(this.abdalMagnicodeMagnifiedContent);
+    this.abdalMagnicodeMagnifier.appendChild(this.abdalMagnicodeMatteOverlay);
     document.body.appendChild(this.abdalMagnicodeMagnifier);
   }
 
@@ -261,39 +303,39 @@ class AbdalMagnicode {
     const pageY = y + scrollY;
   
     // Calculate offset for view (no magnification)
-    // const offsetX = (size / 2) - pageX;
-    // const offsetY = (size / 2) - pageY;
+    const offsetX = (size / 2) - pageX;
+    const offsetY = (size / 2) - pageY;
   
-    // const contentView = document.createElement('div');
-    // contentView.id = 'abdalMagnicode-magnified-content-view';
-    // contentView.style.cssText = `
-    //   position: absolute;
-    //   top: ${offsetY}px;
-    //   left: ${offsetX}px;
-    //   width: ${document.documentElement.scrollWidth}px;
-    //   height: ${document.documentElement.scrollHeight}px;
-    //   pointer-events: none;
-    // `;
-
-
-    const magnification = 1.5;  
-
-    const offsetX = (size / 2) - pageX * magnification;
-    const offsetY = (size / 2) - pageY * magnification;
-    
     const contentView = document.createElement('div');
     contentView.id = 'abdalMagnicode-magnified-content-view';
     contentView.style.cssText = `
       position: absolute;
       top: ${offsetY}px;
       left: ${offsetX}px;
-      width: ${document.documentElement.scrollWidth * magnification}px;
-      height: ${document.documentElement.scrollHeight * magnification}px;
-      transform: scale(${magnification});
-      transform-origin: 0 0;
+      width: ${document.documentElement.scrollWidth}px;
+      height: ${document.documentElement.scrollHeight}px;
       pointer-events: none;
     `;
-    
+
+    //
+    // const magnification = 1.5;
+    //
+    // const offsetX = (size / 2) - pageX * magnification;
+    // const offsetY = (size / 2) - pageY * magnification;
+    //
+    // const contentView = document.createElement('div');
+    // contentView.id = 'abdalMagnicode-magnified-content-view';
+    // contentView.style.cssText = `
+    //   position: absolute;
+    //   top: ${offsetY}px;
+    //   left: ${offsetX}px;
+    //   width: ${document.documentElement.scrollWidth * magnification}px;
+    //   height: ${document.documentElement.scrollHeight * magnification}px;
+    //   transform: scale(${magnification});
+    //   transform-origin: 0 0;
+    //   pointer-events: none;
+    // `;
+    //
   
     // Clone page content
     const pageClone = document.body.cloneNode(true);

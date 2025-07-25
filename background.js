@@ -61,5 +61,17 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       autoCopy: message.settings.autoCopy,
       magnifierOpacity: message.settings.magnifierOpacity
     });
+    
+    // Notify all tabs about settings update
+    browser.tabs.query({}, (tabs) => {
+      tabs.forEach(tab => {
+        browser.tabs.sendMessage(tab.id, {
+          action: "settingsUpdated",
+          settings: message.settings
+        }).catch(() => {
+          // Ignore errors for tabs that don't have the content script
+        });
+      });
+    });
   }
 }); 
